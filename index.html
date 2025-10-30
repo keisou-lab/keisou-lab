@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>電線計算ツール｜VVF・CVV対応｜第二種電気工事士・DIY向け無料サイト</title>
+
+  <!-- ✅ SEO最適化 -->
+  <meta name="description" content="VVF・CVVケーブルの電圧降下・必要断面積を自動計算。第二種電気工事士・計装工事管理者・設備設計者・DIYユーザー向けの無料電線計算ツール。">
+  <meta name="keywords" content="電線計算, 断面積, 電圧降下, 電気工事, 第二種電気工事士, DIY, ケーブル計算, VVF, CVV, ケーブルサイズ, 計装工事, 電気設備設計">
+  <meta name="author" content="keisou-lab">
+
+  <!-- OGP（SNS共有最適化） -->
+  <meta property="og:title" content="電線計算ツール｜VVF・CVV対応｜電気工事士・DIY向け無料サイト">
+  <meta property="og:description" content="VVF・CVVなどのケーブルごとに、電圧・電流・距離から必要な断面積を自動計算。第二種電気工事士や設備設計者の現場にも最適。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://keisou-lab.github.io/">
+  <meta property="og:image" content="https://keisou-lab.github.io/thumbnail.jpg">
+
+  <link rel="canonical" href="https://keisou-lab.github.io/">
+
+  <!-- ✅ Google広告 -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9458897141107764"
+     crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="style.css">
+  <meta name="google-site-verification" content="L-3SLHpymHB_O3fGrVJYvYy5hf72cg-bhTupEXzHXvo" />
+
+  <style>
+    /* ✅ スマホユーザー向けUI改善 */
+    body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; margin: 20px; }
+    .container label { display: block; margin: 12px 0; }
+    input, select, button { width: 100%; font-size: 1.1em; padding: 8px; }
+    button { background-color: #0078d7; color: white; border: none; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+    button:hover { background-color: #005fa3; }
+    #result { background: #f8f9fa; padding: 15px; margin-top: 15px; border-radius: 6px; }
+    @media (min-width: 768px) {
+      input, select, button { width: 50%; }
+    }
+  </style>
+</head>
+<body>
+  <h1>電線の必要断面積計算ツール（VVF・CVV対応）</h1>
+  <p><strong>VVF・CVV・EM・AZシリーズなど各種ケーブル対応。</strong><br>
+  電圧・電流・距離から電線の必要断面積を自動計算。<br>
+  計装工事管理者・第二種電気工事士・電気設備設計者・DIYユーザーにもおすすめの電線計算サイトです。</p>
+
+  <div class="container">
+    <label>ケーブル種類:
+      <select id="cableType"></select>
+    </label>
+    <label>電圧 (V):
+      <input id="voltage" type="number" placeholder="例: 100">
+    </label>
+    <label>電流 (A):
+      <input id="current" type="number" placeholder="例: 15">
+    </label>
+    <label>距離 (m):
+      <input id="distance" type="number" placeholder="例: 20">
+    </label>
+    <label>許容電圧降下率 (%):
+      <input id="dropRate" type="number" placeholder="例: 2">
+    </label>
+    <button id="calcBtn">断面積を計算する</button>
+    <div id="result"></div>
+  </div>
+
+  <hr>
+  <h2>このツールについて</h2>
+  <p>
+    本ツールは、電圧降下率の許容範囲内で必要な電線の断面積を求めるための無料計算サイトです。<br>
+    材質（銅・アルミ・錫メッキ銅）の抵抗率を考慮し、VVFやCVVなど多様なケーブルに対応しています。<br>
+    現場作業・設計業務・資格試験対策など、さまざまなシーンで活用できます。
+  </p>
+
+  <p><strong>監修：</strong> 第二種電気工事士 / 電気設備設計経験者</p>
+
+  <p>参考リンク：  
+    <a href="https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/denki/index.html" target="_blank">経済産業省 電気安全ページ</a> ｜ 
+    <a href="https://www.jisc.go.jp/" target="_blank">JIS規格（日本産業標準調査会）</a>
+  </p>
+
+  <hr>
+  <h2>プライバシーポリシー</h2>
+  <p>
+    当サイトでは、第三者配信の広告サービス（Google AdSense）を利用しています。<br>
+    広告配信事業者はCookieを使用し、ユーザーの興味に基づく広告を表示する場合があります。<br>
+    詳細は
+    <a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank">Googleポリシーと規約</a>をご覧ください。
+  </p>
+  <p>
+    入力されたデータ（電圧・電流・距離など）はブラウザ内でのみ処理され、
+    サーバーに保存・送信されることはありません。安心してご利用ください。
+  </p>
+
+  <script src="script.js"></script>
+</body>
+</html>
