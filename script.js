@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         els.cableType.appendChild(opt);
       });
 
-      // 計算関数
       const calculate = () => {
         const type = els.cableType.value;
         const V = parseFloat(els.voltage.value);
@@ -29,9 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const L = parseFloat(els.distance.value);
         const dropRate = parseFloat(els.dropRate.value);
 
-        // 入力値チェック
         if (!type || isNaN(V) || isNaN(I) || isNaN(L) || isNaN(dropRate)) {
-          els.result.innerHTML = "<p style='color:gray;'>⚙️ 数値をすべて入力してください。</p>";
+          els.result.innerHTML = "<p style='color:gray;'>⚙️ 全ての数値を入力してください。</p>";
           return;
         }
 
@@ -56,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <h3>${type} の計算結果</h3>
             <p>材質: ${cable.material}</p>
             <p>必要断面積: <strong>${selected.s} mm² 以上</strong></p>
-            <p>予想電圧降下: ${selected.Vdrop.toFixed(2)} V（許容 ${maxDrop.toFixed(2)} V以内）</p>
+            <p>電圧降下: ${selected.Vdrop.toFixed(2)} V（許容 ${maxDrop.toFixed(2)} V以内）</p>
           `;
         } else {
           els.result.innerHTML = `
@@ -65,16 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       };
 
-      // 入力が変わるたびに即計算
-      ["change", "keyup", "input"].forEach(eventType => {
-        els.cableType.addEventListener(eventType, calculate);
-        els.voltage.addEventListener(eventType, calculate);
-        els.current.addEventListener(eventType, calculate);
-        els.distance.addEventListener(eventType, calculate);
-        els.dropRate.addEventListener(eventType, calculate);
+      ["change", "input"].forEach(eventType => {
+        Object.values(els).forEach(el => {
+          if (el.tagName === "INPUT" || el.tagName === "SELECT")
+            el.addEventListener(eventType, calculate);
+        });
       });
 
-      // クリック計算（従来ボタンも残す）
       els.calcBtn.addEventListener("click", calculate);
     })
     .catch(err => {

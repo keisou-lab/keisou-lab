@@ -1,29 +1,54 @@
 body {
-  font-family: "Helvetica", "Arial", sans-serif;
-  margin: 40px;
+  font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Meiryo", sans-serif;
+  margin: 20px;
   background: #f8f9fa;
   color: #333;
+  line-height: 1.6;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-width: 300px;
+  gap: 14px;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-input {
+label {
+  font-weight: 600;
+  color: #222;
+}
+
+input,
+select {
   width: 100%;
-  padding: 5px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  border-color: #0078d7;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,120,215,0.3);
 }
 
 button {
-  padding: 10px;
+  padding: 12px;
+  font-size: 1.1rem;
   background-color: #0078d7;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -31,6 +56,34 @@ button:hover {
 }
 
 #result {
-  margin-top: 15px;
+  margin-top: 18px;
   font-weight: bold;
+  background: #eef4ff;
+  border-radius: 6px;
+  padding: 15px;
+  border-left: 5px solid #0078d7;
+  font-size: 1rem;
+}
+
+h1 {
+  color: #004080;
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  body {
+    margin: 10px;
+  }
+
+  .container {
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 10px;
+  }
 }
