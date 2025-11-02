@@ -1,21 +1,48 @@
+/* ------------------------------
+   keisou-lab Style (ver.3)
+   ------------------------------ */
+
 body {
   font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Meiryo", sans-serif;
-  margin: 20px;
+  margin: 0;
   background: #f8f9fa;
   color: #333;
   line-height: 1.6;
 }
 
+/* 🔵 ヒーローバナー */
+.hero {
+  background: linear-gradient(rgba(0,60,130,0.55), rgba(0,60,130,0.65)),
+    url('https://cdn.pixabay.com/photo/2016/10/06/18/02/electrician-1717301_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 90px 20px 80px 20px;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  color: #f0f0f0;
+}
+
+/* 🧮 コンテナ */
 .container {
   display: flex;
   flex-direction: column;
   gap: 14px;
   max-width: 420px;
-  margin: 0 auto;
-  padding: 15px;
+  margin: 40px auto;
+  padding: 20px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
 label {
@@ -65,25 +92,43 @@ button:hover {
   font-size: 1rem;
 }
 
-h1 {
-  color: #004080;
-  text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 10px;
+/* 🔩 セクション全体 */
+section {
+  max-width: 800px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
+/* 📘 見出し */
+h1, h2 {
+  color: #004080;
+}
+
+/* 📜 フッター */
+footer {
+  text-align: center;
+  padding: 30px 10px;
+  background: #00264d;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #99c2ff;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 スマホ最適化 */
 @media (max-width: 600px) {
-  body {
-    margin: 10px;
-  }
-
-  .container {
-    padding: 10px;
-    box-shadow: none;
-  }
-
-  button {
-    font-size: 1rem;
-    padding: 10px;
-  }
+  .hero-content h1 { font-size: 1.5rem; }
+  .hero-content p { font-size: 1rem; }
+  .container { margin: 20px 10px; padding: 15px; }
+  section { margin: 25px 10px; padding: 20px; }
 }
