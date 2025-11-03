@@ -1,7 +1,7 @@
 /* 電圧降下合計計算ツール keisou-lab（共通データ&共通ヘッダー対応） */
 
-// ルート共通のケーブルデータを利用
-const JSON_URL = "/cable_data.json";
+// ✅ ルート共通のケーブルデータを相対パスで利用
+const JSON_URL = "../cable_data.json";
 
 // 既存DOM取得
 const cableTypeSel = document.getElementById("cableType");
@@ -19,7 +19,7 @@ const totalBox     = document.getElementById("totalBox");
 let cableData = {};
 let list = JSON.parse(localStorage.getItem("vdropList") || "[]");
 
-// ===== ケーブルデータ読込（ルートから） =====
+// ===== ケーブルデータ読込（相対パス） =====
 fetch(JSON_URL)
   .then(r => {
     if (!r.ok) throw new Error("cable_data.json が読み込めませんでした");
@@ -56,17 +56,16 @@ cableTypeSel.addEventListener("change", () => {
 
 // ===== 電圧降下計算（簡易） =====
 function calcDrop({ rho, section, sys, pf, V, I, L }) {
-  // 抵抗：ρ[Ω·mm²/m]、断面[mm²]、往復長 2L[m]
   const loopR = (rho * (2 * L)) / section;
   let Vdrop = 0;
   switch (sys) {
     case "dc":
       Vdrop = I * loopR;
       break;
-    case "ac1": // 単相2線（抵抗分×pfの簡易）
+    case "ac1":
       Vdrop = I * loopR * pf;
       break;
-    case "ac3": // 三相3線（簡易：√3×I×(loopR/2)×pf）
+    case "ac3":
       Vdrop = Math.sqrt(3) * I * (loopR / 2) * pf;
       break;
     default:
@@ -85,7 +84,6 @@ document.getElementById("calcBtn").addEventListener("click", () => {
   const V    = Number(vInput.value);
   const I    = Number(iInput.value);
   const L    = Number(lenInput.value);
-  // 断面未指定なら当該ケーブルの最小値を採用
   const A    = Number(sectionSel.value || (cableData?.[type]?.sections?.[0] ?? 2));
 
   if (!type || !V || !I || !L) {
@@ -158,7 +156,7 @@ document.getElementById("downloadCsvBtn").addEventListener("click", () => {
   if (!list.length) return alert("データがありません");
   const header = ["ケーブル", "断面積(mm²)", "距離(m)", "電圧降下率(%)"];
   const rows = list.map(r => [r.type, r.section, r.length, r.drop.toFixed(3)]);
-  const csv = [header, ...rows].map(e => e.join(",")).join("\n");
+  const csv = [header, ...rows].map(e => e.join(",")).join("\\n");
   const blob = new Blob([csv], { type: "text/csv" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");

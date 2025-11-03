@@ -1,6 +1,7 @@
 /* 電線の必要断面積計算ツール keisou-lab（共通データ&共通ヘッダー対応） */
 
-const JSON_URL = "/cable_data.json"; // 共通データ利用
+// ✅ 相対パスに修正（GitHub Pages対応）
+const JSON_URL = "../cable_data.json"; // 共通データ利用
 
 const cableTypeSel = document.getElementById("cableType");
 const voltageInput = document.getElementById("voltage");
@@ -48,6 +49,10 @@ document.getElementById("calcBtn").addEventListener("click", () => {
 
   resultBox.innerHTML = `
     <b>必要断面積：</b> ${Areq.toFixed(2)} mm²<br>
-    <b>推奨サイズ：</b> ${nearest !== "該当なし" ? nearest + " mm²" : "<span style='color:red'>該当ケーブルなし</span>"}
+    <b>推奨サイズ：</b> ${
+      nearest !== "該当なし"
+        ? nearest + " mm²"
+        : "<span style='color:red'>該当ケーブルなし</span>"
+    }
   `;
 });
