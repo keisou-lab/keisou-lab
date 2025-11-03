@@ -24,4 +24,18 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+  <loc>https://keisou-lab.github.io/densenkisan/</loc>
+  <lastmod>2025-11-03</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://keisou-lab.github.io/voltage-drop-keisan-tool/</loc>
+  <lastmod>2025-11-03</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
 </urlset>
+
