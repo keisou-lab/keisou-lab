@@ -1,7 +1,3 @@
-/* ------------------------------
-   keisou-lab Style (ver.3)
-   ------------------------------ */
-
 body {
   font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Meiryo", sans-serif;
   margin: 0;
@@ -10,39 +6,70 @@ body {
   line-height: 1.6;
 }
 
-/* 🔵 ヒーローバナー */
+/* ✅ ナビゲーションバー */
+.site-nav {
+  text-align: center;
+  background: linear-gradient(90deg, #004080, #0066cc);
+  padding: 12px 0;
+}
+
+.site-nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 18px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.site-nav a:hover {
+  color: #cce6ff;
+}
+
+/* ✅ ヒーローバナー */
 .hero {
-  background: linear-gradient(rgba(0,60,130,0.55), rgba(0,60,130,0.65)),
-    url('https://cdn.pixabay.com/photo/2016/10/06/18/02/electrician-1717301_1280.jpg');
+  background-image: url("https://images.unsplash.com/photo-1581093588401-22f4f7d3e6b3?auto=format&fit=crop&w=1600&q=80");
   background-size: cover;
   background-position: center;
-  color: #fff;
+  color: white;
   text-align: center;
-  padding: 90px 20px 80px 20px;
+  padding: 80px 20px;
+  position: relative;
 }
 
-.hero-content h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
 }
 
-.hero-content p {
-  font-size: 1.1rem;
-  color: #f0f0f0;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-/* 🧮 コンテナ */
+.hero h1 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1rem;
+}
+
+/* ✅ メインコンテンツ */
 .container {
   display: flex;
   flex-direction: column;
   gap: 14px;
   max-width: 420px;
-  margin: 40px auto;
-  padding: 20px;
+  margin: 30px auto;
+  padding: 15px;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 label {
@@ -92,32 +119,14 @@ button:hover {
   font-size: 1rem;
 }
 
-/* 🔩 セクション全体 */
-section {
-  max-width: 800px;
-  margin: 50px auto;
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-/* 📘 見出し */
-h1, h2 {
-  color: #004080;
-}
-
-/* 📜 フッター */
 footer {
   text-align: center;
-  padding: 30px 10px;
-  background: #00264d;
-  color: #fff;
-  font-size: 0.9rem;
+  margin: 40px 0 20px;
+  color: #555;
 }
 
 footer a {
-  color: #99c2ff;
+  color: #004080;
   text-decoration: none;
 }
 
@@ -125,10 +134,19 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* 📱 スマホ最適化 */
 @media (max-width: 600px) {
-  .hero-content h1 { font-size: 1.5rem; }
-  .hero-content p { font-size: 1rem; }
-  .container { margin: 20px 10px; padding: 15px; }
-  section { margin: 25px 10px; padding: 20px; }
+  .hero {
+    padding: 60px 15px;
+  }
+  .hero h1 {
+    font-size: 1.4rem;
+  }
+  .container {
+    width: 90%;
+    box-shadow: none;
+  }
+  button {
+    font-size: 1rem;
+    padding: 10px;
+  }
 }
