@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>keisou-lab | 電気工事・計装設計ツール集</title>
+
+  <meta name="description" content="keisou-labは、電気工事・計装設計者向けの無料Webツールを提供。VVF・CVVケーブル計算、電圧降下計算、現場支援に役立つシンプルな設計支援サイト。" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" href="/style.css" />
+  <script defer src="/include.js"></script>
+</head>
+
+<body>
+  <!-- 共通ヘッダー -->
+  <div data-include="/common/header.html"></div>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>keisou-lab｜電気工事・計装設計ツール集</h1>
+      <p>現場と設計の“間”をつなぐ。<br>電線計算・電圧降下ツールを無料で提供。</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2>ツール一覧</h2>
+    <div class="tool-list">
+      <a class="tool-card" href="/densenkisan/">
+        <h3>電線の必要断面積計算ツール</h3>
+        <p>VVF・CVV・EM・AZケーブルに対応。<br>電圧・電流・距離から必要断面積を自動算出。</p>
+      </a>
+      <a class="tool-card" href="/voltage-drop-keisan-tool/">
+        <h3>電圧降下合計計算ツール</h3>
+        <p>複数区間の電圧降下を合計し、許容値と自動比較。<br>OK/NGを即判定。</p>
+      </a>
+    </div>
+
+    <p class="note" style="text-align:center;margin-top:30px;">
+      ※ すべてのツールで共通ケーブルデータ（<code>cable_data.json</code>）を利用しています。
+    </p>
+  </main>
+
+  <!-- 共通フッター -->
+  <div data-include="/common/footer.html"></div>
+</body>
+</html>

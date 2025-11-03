@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>電線の必要断面積計算ツール（VVF・CVV対応） | keisou-lab</title>
+
+  <meta name="description" content="VVF・CVVケーブルの電圧降下・必要断面積を自動計算。第二種電気工事士・計装工事管理者・設備設計者・DIYユーザー向けの無料電線計算ツール。" />
+  <meta name="author" content="keisou-lab" />
+  <link rel="canonical" href="https://keisou-lab.github.io/" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+
+  <!-- 共通CSS・インクルード -->
+  <link rel="stylesheet" href="/style.css" />
+  <script defer src="/include.js"></script>
+</head>
+
+<body>
+  <!-- 共通ヘッダー -->
+  <div data-include="/common/header.html"></div>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>電線の必要断面積計算ツール（VVF・CVV対応）</h1>
+      <p>VVF・CVV・EM・AZシリーズなど各種ケーブルに対応。<br>電圧・電流・距離から必要な断面積を自動計算。</p>
+      <div class="hero-badges">
+        <span class="badge">VVF / CVV / EM / AZ</span>
+        <span class="badge">電圧降下から自動算出</span>
+        <span class="badge">現場対応スマホ最適化</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <label>ケーブル種類
+      <select id="cableType"></select>
+    </label>
+
+    <label>電圧 (V)
+      <input id="voltage" type="number" inputmode="decimal" placeholder="例: 100" />
+    </label>
+
+    <label>電流 (A)
+      <input id="current" type="number" inputmode="decimal" placeholder="例: 15" />
+    </label>
+
+    <label>距離 (m)
+      <input id="distance" type="number" inputmode="decimal" placeholder="例: 20" />
+    </label>
+
+    <label>許容電圧降下率 (%)
+      <input id="dropRate" type="number" inputmode="decimal" value="10" />
+    </label>
+
+    <button id="calcBtn" class="btn-primary">必要断面積を計算</button>
+    <div id="result" class="result-card"></div>
+
+    <p class="note">
+      ※ この計算は簡易計算式を採用し、リアクタンスは考慮していません。<br>
+      ※ 三相回路の場合は線間電圧・電流を入力してください。
+    </p>
+  </main>
+
+  <section class="section">
+    <div class="inner">
+      <h2>このツールについて</h2>
+      <p>
+        本ツールは、電圧降下率の許容範囲内で必要な電線断面積を求める無料Webアプリです。<br>
+        材質（銅・アルミ）の抵抗率を考慮し、VVF・CVV・EM・AZケーブルなどに対応しています。<br>
+        <strong>監修：</strong> 第二種電気工事士 / 計装工事設計経験者
+      </p>
+
+      <p>
+        参考リンク：  
+        <a href="https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/denki/index.html" target="_blank">経済産業省 電気安全</a> ｜ 
+        <a href="https://www.jisc.go.jp/" target="_blank">JIS規格</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 共通フッター -->
+  <div data-include="/common/footer.html"></div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
