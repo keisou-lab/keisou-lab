@@ -15,7 +15,6 @@
 
   <!-- 共通スタイル＆共通インクルード -->
   <link rel="stylesheet" href="../style.css" />
-  <script defer src="../include.js"></script>
 
   <!-- ページ固有の微調整（必要なら） -->
   <style>
@@ -182,6 +181,14 @@ V<sub>drop</sub> = √3 × I × (ρ × 2L / (2 × A)) × pf
   <!-- 共通フッター -->
   <div data-include="../common/footer.html"></div>
 
+  <!-- JS 読み込みを最後にまとめる -->
+  <script src="../include.js"></script>
   <script src="./script.js"></script>
+  <script>
+    // include.jsを強制再呼び出し（defer回避）
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof includeHTML === "function") includeHTML();
+    });
+  </script>
 </body>
 </html>
