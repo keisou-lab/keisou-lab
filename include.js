@@ -1,7 +1,11 @@
 // include.js（共通ヘッダー・フッター読込スクリプト）
 function includeHTML() {
   document.querySelectorAll('[data-include]').forEach(el => {
-    const file = el.getAttribute('data-include');
+    let file = el.getAttribute('data-include');
+    // 絶対パス指定（/common/...）を相対参照（./common/...）に自動補正
+    if (file.startsWith('/')) {
+      file = '.' + file;
+    }
     fetch(file)
       .then(res => res.text())
       .then(html => el.innerHTML = html)
