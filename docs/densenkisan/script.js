@@ -1,7 +1,7 @@
 /* 電線の必要断面積計算ツール keisou-lab（共通データ&共通ヘッダー対応） */
 
 // ✅ 相対パスに修正（GitHub Pages対応）
-const JSON_URL = "../cable_data.json"; // 共通データ利用
+const JSON_URL = "/docs/cable_data.json"; // 共通データ利用
 
 const cableTypeSel = document.getElementById("cableType");
 const voltageInput = document.getElementById("voltage");
