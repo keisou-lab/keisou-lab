@@ -2,22 +2,16 @@
 function includeHTML() {
   document.querySelectorAll('[data-include]').forEach(el => {
     let file = el.getAttribute('data-include');
-    // 絶対パス指定（/common/...）を相対参照に自動補正
-    if (file.startsWith('/')) {
-      file = '.' + file;
-    }
+    if (file.startsWith('/')) file = '.' + file;
     fetch(file)
       .then(res => {
         if (!res.ok) throw new Error(res.statusText);
         return res.text();
       })
-      .then(html => {
-        el.innerHTML = html;
-      })
+      .then(html => el.innerHTML = html)
       .catch(err => {
         console.error("Include failed:", file, err);
         el.innerHTML = "<p>共通部分の読み込みに失敗しました。</p>";
       });
   });
 }
-document.addEventListener('DOMContentLoaded', includeHTML);
