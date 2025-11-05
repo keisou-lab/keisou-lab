@@ -1,1 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://keisou-lab.github.io/sitemap.xml
 
