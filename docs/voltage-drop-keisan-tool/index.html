@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>電圧降下率合計計算ツール｜複数区間の降下をOK/NG判定【無料】 | keisou-lab</title>
+
+  <!-- SEO -->
+  <meta name="description" content="複数区間の電圧降下を合計し、許容電圧降下率と比較してOK/NGを判定する無料ツール。VVF・CVV・計装ケーブルなどに対応。" />
+  <meta name="author" content="keisou-lab" />
+  <link rel="canonical" href="https://keisou-lab.github.io/voltage-drop-keisan-tool/" />
+
+  <!-- Favicon（ルート共通） -->
+  <link rel="icon" type="image/png" href="../favicon.png" />
+
+  <!-- 共通スタイル＆共通インクルード -->
+  <link rel="stylesheet" href="../style.css" />
+  <script defer src="../include.js"></script>
+
+  <!-- ページ固有の微調整（必要なら） -->
+  <style>
+    /* ヒーローの写真だけこのページ向けに差し替えたい場合はここで */
+    /* ルート style.css の .hero をそのまま使うなら何も不要 */
+  </style>
+</head>
+
+<body>
+  <!-- 共通ヘッダー -->
+  <div data-include="../common/header.html"></div>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>電圧降下合計計算ツール</h1>
+      <p>複数区間の電圧降下を合計して、許容電圧降下率と自動比較。<br>現場でもスマホでサッと使える設計支援ツールです。</p>
+      <div class="hero-badges">
+        <span class="badge">VVF / CVV / 計装ケーブル</span>
+        <span class="badge">OK/NG 即時表示</span>
+        <span class="badge">CSV 出力</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <label>ケーブル種類
+      <select id="cableType"></select>
+    </label>
+
+    <label>断面積 (mm²)
+      <select id="section">
+        <option value="">未指定（最小値）</option>
+      </select>
+    </label>
+
+    <label>電圧 (V)
+      <input id="voltage" type="number" inputmode="decimal" placeholder="例: 100" />
+    </label>
+
+    <label>電流 (A)
+      <input id="current" type="number" inputmode="decimal" placeholder="例: 15" />
+    </label>
+
+    <label>距離 (m)（片道）
+      <input id="length" type="number" inputmode="decimal" placeholder="例: 20" />
+    </label>
+
+    <label>力率 (pf)
+      <input id="pf" type="number" step="0.01" min="0" max="1" value="1.00" />
+    </label>
+
+    <label>電源方式
+      <select id="system">
+        <option value="dc">直流</option>
+        <option value="ac1">単相2線</option>
+        <option value="ac3" selected>三相3線</option>
+      </select>
+    </label>
+
+    <label>許容電圧降下率 (%)
+      <input id="maxDropRate" type="number" inputmode="decimal" value="10" />
+    </label>
+
+    <button id="calcBtn" class="btn-primary">区間を追加</button>
+    <button id="resetBtn" class="btn-ghost">リセット</button>
+
+    <table id="cableTable">
+      <thead>
+        <tr>
+          <th>ケーブル</th><th>断面積</th><th>距離(m)</th><th>降下率(%)</th><th>削除</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="totalBox" class="result-card"></div>
+
+    <button id="downloadCsvBtn" class="btn-ghost">CSV出力</button>
+
+    <p class="note" style="margin-top:10px">
+      ※ 簡易計算：リアクタンスは無視し、往復長（2×距離）ベースで評価。<br>
+      ※ 三相回路は等価的に見積り（設計時は必ず社内基準や電技解釈で最終確認）。<br>
+      ※ ケーブルデータはサイト共通の <code>/cable_data.json</code> を参照しています。
+    </p>
+  </main>
+
+  <!-- ▼▼▼ 計算式と理論説明の追加 ▼▼▼ -->
+  <section class="section">
+    <div class="inner">
+      <h2>電圧降下の計算式と理論</h2>
+      <p>
+        本ツールでは、各区間ごとの電圧降下率を計算し、それを合計して総合電圧降下を求めています。<br>
+        計算の基本式は以下の通りです。
+      </p>
+
+      <pre style="background:#f6f8fa;padding:10px;border-radius:8px;">
+V<sub>drop</sub> = I × R × 2L
+      </pre>
+
+      <p>
+        各記号の意味は次の通りです：
+      </p>
+      <ul>
+        <li><b>I</b>：電流 [A]</li>
+        <li><b>R</b>：電線1mあたりの抵抗 [Ω/m]</li>
+        <li><b>L</b>：距離（片道） [m]</li>
+      </ul>
+
+      <p>
+        抵抗Rは、電線の材質と断面積から次式で求められます：
+      </p>
+      <pre style="background:#f6f8fa;padding:10px;border-radius:8px;">
+R = ρ × (1 / A)
+      </pre>
+
+      <p>
+        ここで ρ（ロー）は電線の抵抗率を示し、材質によって異なります。代表値は以下の通りです：
+      </p>
+
+      <ul>
+        <li>銅（Cu）：0.01724 Ω·mm²/m</li>
+        <li>アルミ（Al）：0.02826 Ω·mm²/m</li>
+      </ul>
+
+      <p>
+        三相交流の場合は、線間電圧・電流を考慮して次のように補正します：
+      </p>
+
+      <pre style="background:#f6f8fa;padding:10px;border-radius:8px;">
+V<sub>drop</sub> = √3 × I × (ρ × 2L / (2 × A)) × pf
+      </pre>
+
+      <p>
+        pf は力率（Power Factor）を表します。<br>
+        この式を用いて各区間の電圧降下率を求め、それらを合計することで全体の降下率を算出します。
+      </p>
+
+      <h2>計算の流れ</h2>
+      <ol>
+        <li>ケーブルの種類（VVF・CVV・EM・AZなど）を選択</li>
+        <li>断面積・電圧・電流・距離・力率・方式を入力</li>
+        <li>各区間ごとの降下率を追加ボタンで登録</li>
+        <li>複数区間の降下率が自動的に合計表示され、許容値と比較してOK/NG判定</li>
+      </ol>
+
+      <h2>使用上の注意</h2>
+      <ul>
+        <li>本計算は簡易計算であり、リアクタンス成分は考慮していません。</li>
+        <li>実際の設計では、ケーブルメーカーの仕様書および社内設計基準を必ず参照してください。</li>
+        <li>許容電圧降下率の目安は一般的に5〜10%程度です。</li>
+      </ul>
+
+      <h2>参考資料・関連法規</h2>
+      <ul>
+        <li>電気設備技術基準 第58条（絶縁抵抗）</li>
+        <li>JIS C 8305（電気配線用ケーブル規格）</li>
+        <li>経済産業省 電気安全関連資料</li>
+      </ul>
+    </div>
+  </section>
+  <!-- ▲▲▲ 追加セクションここまで ▲▲▲ -->
+
+  <!-- 共通フッター -->
+  <div data-include="../common/footer.html"></div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
