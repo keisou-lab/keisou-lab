@@ -1,7 +1,5 @@
-/* 電線の必要断面積計算ツール keisou-lab（共通データ&共通ヘッダー対応） */
-
-// ✅ 修正
-const JSON_URL = "./../cable_data.json"; // 相対パスに戻す
+/* 電線の必要断面積計算ツール keisou-lab（GitHub Pages対応） */
+const JSON_URL = window.location.origin + "/cable_data.json";  // ✅ 絶対パス指定
 
 const cableTypeSel = document.getElementById("cableType");
 const voltageInput = document.getElementById("voltage");
@@ -39,13 +37,12 @@ document.getElementById("calcBtn").addEventListener("click", () => {
     return;
   }
 
-  const rho = cableData[type]?.resistivity || 0.01724; // 銅の標準値
+  const rho = cableData[type]?.resistivity || 0.01724;
   const VdropAllow = V * dropRate;
   const Rmax = VdropAllow / (2 * I * L);
   const Areq = rho / Rmax;
 
-  const nearest = (cableData[type]?.sections || [])
-    .find(a => a >= Areq) || "該当なし";
+  const nearest = (cableData[type]?.sections || []).find(a => a >= Areq) || "該当なし";
 
   resultBox.innerHTML = `
     <b>必要断面積：</b> ${Areq.toFixed(2)} mm²<br>
