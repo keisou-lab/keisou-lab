@@ -1,6 +1,6 @@
-/* 電線の必要断面積計算ツール keisou-lab（GitHub Pages対応） */
+/* 電線の必要断面積計算ツール keisou-lab（GitHub Pages完全対応） */
 const repo = window.location.pathname.split('/')[1];
-const JSON_URL = `${window.location.origin}/${repo}/cable_data.json`;  // ✅ 絶対URLを自動生成（確実に読める）
+const JSON_URL = `${window.location.origin}/${repo}/cable_data.json`;  // ✅ リポ名を自動付与して絶対URLにする
 
 const cableTypeSel = document.getElementById("cableType");
 const voltageInput = document.getElementById("voltage");
