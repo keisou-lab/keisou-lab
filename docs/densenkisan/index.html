@@ -10,13 +10,150 @@
   <link rel="canonical" href="https://keisou-lab.github.io/densenkisan/" />
   <link rel="icon" type="image/png" href="../favicon.png" />
 
+  <!-- 共通CSS・インクルード -->
   <link rel="stylesheet" href="../style.css" />
   <script defer src="../include.js"></script>
 </head>
+
 <body>
+  <!-- 共通ヘッダー -->
   <div data-include="../common/header.html"></div>
-  ...（あなたの送付コードと完全同一）...
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>電線の必要断面積計算ツール（VVF・CVV対応）</h1>
+      <p>VVF・CVV・EM・AZシリーズなど各種ケーブルに対応。<br>電圧・電流・距離から必要な断面積を自動計算。</p>
+      <div class="hero-badges">
+        <span class="badge">VVF / CVV / EM / AZ</span>
+        <span class="badge">電圧降下から自動算出</span>
+        <span class="badge">現場対応スマホ最適化</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <label>ケーブル種類
+      <select id="cableType"></select>
+    </label>
+
+    <label>電圧 (V)
+      <input id="voltage" type="number" inputmode="decimal" placeholder="例: 100" />
+    </label>
+
+    <label>電流 (A)
+      <input id="current" type="number" inputmode="decimal" placeholder="例: 15" />
+    </label>
+
+    <label>距離 (m)
+      <input id="distance" type="number" inputmode="decimal" placeholder="例: 20" />
+    </label>
+
+    <label>許容電圧降下率 (%)
+      <input id="dropRate" type="number" inputmode="decimal" value="10" />
+    </label>
+
+    <button id="calcBtn" class="btn-primary">必要断面積を計算</button>
+    <div id="result" class="result-card"></div>
+
+    <p class="note">
+      ※ この計算は簡易計算式を採用し、リアクタンスは考慮していません。<br>
+      ※ 三相回路の場合は線間電圧・電流を入力してください。
+    </p>
+  </main>
+
+  <!-- ▼▼▼ 計算式の解説セクション 追加 ▼▼▼ -->
+  <section class="section">
+    <div class="inner">
+      <h2>計算式の根拠と解説</h2>
+      <p>
+        本ツールでは、ケーブルの電圧降下をもとに必要な電線断面積を求めています。<br>
+        電線抵抗による電圧降下は以下の式で表されます。
+      </p>
+
+      <pre style="background:#f6f8fa;padding:10px;border-radius:8px;">
+V<sub>drop</sub> = I × R × 2L
+      </pre>
+
+      <p>
+        ここで、
+      </p>
+      <ul>
+        <li><b>I</b>：負荷電流 [A]</li>
+        <li><b>R</b>：電線1mあたりの抵抗 [Ω/m]</li>
+        <li><b>L</b>：配線長（片道） [m]</li>
+      </ul>
+      <p>
+        2Lは「往復長」を意味します。<br>
+        抵抗 R は、以下のように電線の材質と断面積から計算します：
+      </p>
+
+      <pre style="background:#f6f8fa;padding:10px;border-radius:8px;">
+R = ρ × (1 / A)
+      </pre>
+
+      <p>
+        <b>ρ（ロー）</b>は抵抗率で、材質によって異なります。<br>
+        代表値として以下を使用しています：
+      </p>
+
+      <ul>
+        <li>銅（Cu）：0.01724 Ω·mm²/m</li>
+        <li>アルミ（Al）：0.02826 Ω·mm²/m</li>
+      </ul>
+
+      <p>
+        許容電圧降下率 ΔV% を考慮して、求めたい断面積 A は次のように導かれます：
+      </p>
+
+      <pre style="background:#f6f8fa;padding:10px;border-radius:8px;">
+A = ρ × (2 × L × I) / (V × ΔV)
+      </pre>
+
+      <p>
+        例：100V系・距離20m・15A・許容電圧降下率10%の場合、<br>
+        <b>必要断面積 ≒ 0.01724 × (2 × 20 × 15) / (100 × 0.10) = 1.03 mm²</b><br>
+        よって、標準サイズ 1.6mm² または 2.0mm² のVVFケーブルを選定します。
+      </p>
+
+      <h2>使い方のポイント</h2>
+      <ul>
+        <li>許容電圧降下率（ΔV）は通常、屋内配線で 2〜10% を目安とします。</li>
+        <li>距離が長い・電流が大きい場合は、1サイズ上のケーブルを選定してください。</li>
+        <li>本計算は簡易式であり、インピーダンス成分（リアクタンス）は考慮していません。</li>
+      </ul>
+
+      <h2>参考文献・規格</h2>
+      <ul>
+        <li>JIS C 8305 電気配線用ケーブル規格</li>
+        <li>電気設備技術基準 第58条（絶縁抵抗）</li>
+        <li>電気工事士試験教材 各社テキストより</li>
+      </ul>
+    </div>
+  </section>
+  <!-- ▲▲▲ 計算式の解説セクション ここまで ▲▲▲ -->
+
+  <section class="section">
+    <div class="inner">
+      <h2>このツールについて</h2>
+      <p>
+        本ツールは、電圧降下率の許容範囲内で必要な電線断面積を求める無料Webアプリです。<br>
+        材質（銅・アルミ）の抵抗率を考慮し、VVF・CVV・EM・AZケーブルなどに対応しています。<br>
+        <strong>監修：</strong> 第二種電気工事士 / 計装工事設計経験者
+      </p>
+
+      <p>
+        参考リンク：  
+        <a href="https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/denki/index.html" target="_blank">経済産業省 電気安全</a> ｜ 
+        <a href="https://www.jisc.go.jp/" target="_blank">JIS規格</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 共通フッター -->
   <div data-include="../common/footer.html"></div>
+
+  <!-- スクリプト -->
   <script src="./script.js"></script>
 </body>
 </html>
