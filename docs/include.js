@@ -3,12 +3,13 @@ function includeHTML() {
   document.querySelectorAll('[data-include]').forEach(el => {
     let file = el.getAttribute('data-include');
 
-    // GitHub PagesのルートURLを自動判定
-    const baseURL = window.location.origin + '/common/';
+    // ✅ 現在のスクリプト(include.js)の位置を基準に共通パスを算出
+    const scriptPath = document.currentScript ? document.currentScript.src : new URL('include.js', document.baseURI).href;
+    const baseURL = new URL('./', scriptPath); // ← 相対でcommon/を解決できるように修正
 
     // common配下のみ共通読み込み（header/footer）
-    if (file.includes('header.html')) file = baseURL + 'header.html';
-    else if (file.includes('footer.html')) file = baseURL + 'footer.html';
+    if (file.includes('header.html')) file = new URL('common/header.html', baseURL);
+    else if (file.includes('footer.html')) file = new URL('common/footer.html', baseURL);
 
     fetch(file)
       .then(res => {

@@ -1,5 +1,5 @@
 /* 電線の必要断面積計算ツール keisou-lab（GitHub Pages対応） */
-const JSON_URL = "../cable_data.json";  // ✅ 絶対パス指定
+const JSON_URL = "../cable_data.json";  // ✅ 相対パスに統一（絶対パスではなく修正）
 
 const cableTypeSel = document.getElementById("cableType");
 const voltageInput = document.getElementById("voltage");
@@ -12,7 +12,10 @@ let cableData = {};
 
 // ==== ケーブルデータ読込 ====
 fetch(JSON_URL)
-  .then(r => r.json())
+  .then(r => {
+    if (!r.ok) throw new Error("cable_data.json が読み込めませんでした");
+    return r.json();
+  })
   .then(json => {
     cableData = json;
     Object.keys(json).forEach(type => {
@@ -22,7 +25,10 @@ fetch(JSON_URL)
       cableTypeSel.appendChild(opt);
     });
   })
-  .catch(() => alert("ケーブルデータの読み込みに失敗しました"));
+  .catch(err => {
+    console.error(err);
+    alert("ケーブルデータの読み込みに失敗しました");
+  });
 
 // ==== 計算ボタン ====
 document.getElementById("calcBtn").addEventListener("click", () => {
