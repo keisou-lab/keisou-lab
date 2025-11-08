@@ -1,15 +1,16 @@
-// include.js（GitHub Pages完全対応版）
+// include.js（GitHub Pages完全対応：どのフォルダ階層でも共通HTMLを正しく読み込む）
 function includeHTML() {
   document.querySelectorAll('[data-include]').forEach(el => {
     let file = el.getAttribute('data-include');
 
-    // ✅ 現在のスクリプト(include.js)の位置を基準に共通パスを算出
-    const scriptPath = document.currentScript ? document.currentScript.src : new URL('include.js', document.baseURI).href;
-    const baseURL = new URL('./', scriptPath); // ← 相対でcommon/を解決できるように修正
+    // ✅ 現在のリポジトリ名を自動抽出（例: keisou-lab-site）
+    const repo = window.location.pathname.split('/')[1];
 
-    // common配下のみ共通読み込み（header/footer）
-    if (file.includes('header.html')) file = new URL('common/header.html', baseURL);
-    else if (file.includes('footer.html')) file = new URL('common/footer.html', baseURL);
+    // ✅ 正しい共通ファイルURLを生成（常にルート直下の common/ を指す）
+    const baseURL = `${window.location.origin}/${repo}/common/`;
+
+    if (file.includes('header.html')) file = baseURL + 'header.html';
+    else if (file.includes('footer.html')) file = baseURL + 'footer.html';
 
     fetch(file)
       .then(res => {
