@@ -1,7 +1,7 @@
 /* 電圧降下合計計算ツール keisou-lab（共通データ&共通ヘッダー対応） */
 
 // ✅ ルート共通のケーブルデータを相対パスで利用
-const JSON_URL = window.location.origin + "/cable_data.json";
+const JSON_URL = "../cable_data.json";
 
 // 既存DOM取得
 const cableTypeSel = document.getElementById("cableType");
