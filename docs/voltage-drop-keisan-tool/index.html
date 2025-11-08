@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>電圧降下率合計計算ツール｜複数区間の降下をOK/NG判定【無料】 | keisou-lab</title>
+
+  <meta name="description" content="複数区間の電圧降下を合計し、許容電圧降下率と比較してOK/NGを判定する無料ツール。VVF・CVV・計装ケーブルなどに対応。">
+  <meta name="author" content="keisou-lab">
+
+  <meta name="google-adsense-account" content="ca-pub-9458897141107764">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9458897141107764" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" href="../favicon.png">
+</head>
+<body>
+
+  <!-- ✅ ナビ -->
+  <nav class="site-nav">
+    <a href="../index.html">ホーム</a>
+    <a href="../about.html">keisou-lab とは？</a>
+    <a href="../densenkisan/index.html">電線断面積計算ツール</a>
+    <a href="../voltage-drop-keisan-tool/index.html">電圧降下計算ツール</a>
+    <a href="../privacy.html">プライバシーポリシー</a>
+    <a href="../disclaimer.html">免責事項</a>
+  </nav>
+
+  <!-- ✅ ヒーローバナー -->
+  <header class="hero" style="background-image: url('https://images.unsplash.com/photo-1602524813279-3c90d7acfc52?auto=format&fit=crop&w=1600&q=80');">
+    <div class="hero-content">
+      <h1>電圧降下合計計算ツール</h1>
+      <p>複数区間の電圧降下を合計し、許容電圧降下率と自動比較。<br>OK/NGを即時判定する設計支援ツールです。</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <label>ケーブル種類
+      <select id="cableType"></select>
+    </label>
+
+    <label>断面積 (mm²)
+      <select id="section">
+        <option value="">未指定（最小値）</option>
+      </select>
+    </label>
+
+    <label>電圧 (V)
+      <input id="voltage" type="number" inputmode="decimal" placeholder="例: 100">
+    </label>
+
+    <label>電流 (A)
+      <input id="current" type="number" inputmode="decimal" placeholder="例: 15">
+    </label>
+
+    <label>距離 (m)（片道）
+      <input id="length" type="number" inputmode="decimal" placeholder="例: 20">
+    </label>
+
+    <label>力率 (pf)
+      <input id="pf" type="number" step="0.01" min="0" max="1" value="1.00">
+    </label>
+
+    <label>電源方式
+      <select id="system">
+        <option value="dc">直流</option>
+        <option value="ac1">単相2線</option>
+        <option value="ac3" selected>三相3線</option>
+      </select>
+    </label>
+
+    <label>許容電圧降下率 (%)
+      <input id="maxDropRate" type="number" inputmode="decimal" value="10">
+    </label>
+
+    <button id="calcBtn" class="btn-primary">区間を追加</button>
+    <button id="resetBtn" class="btn-ghost">リセット</button>
+
+    <table id="cableTable">
+      <thead>
+        <tr>
+          <th>ケーブル</th><th>断面積</th><th>距離(m)</th><th>降下率(%)</th><th>削除</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="totalBox" class="result-card"></div>
+
+    <button id="downloadCsvBtn" class="btn-ghost">CSV出力</button>
+
+    <p class="note" style="margin-top:10px;">
+      ※ 簡易計算：リアクタンスは無視し、往復長（2×距離）ベースで評価。<br>
+      ※ 三相回路は等価的に見積り（設計時は必ず社内基準で最終確認）。<br>
+      ※ ケーブルデータはサイト共通の <code>/cable_data.json</code> を参照しています。
+    </p>
+  </main>
+
+  <!-- ✅ フッター -->
+  <footer>
+    <hr>
+    <p>
+      <a href="../index.html">ホーム</a> ｜ 
+      <a href="../about.html">keisou-lab とは？</a> ｜ 
+      <a href="../privacy.html">プライバシーポリシー</a> ｜ 
+      <a href="../disclaimer.html">免責事項</a>
+    </p>
+    <small>© 2025 keisou-lab</small>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
