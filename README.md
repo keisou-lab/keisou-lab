@@ -1,92 +1,65 @@
-# keisou-lab.github.io
+<!-- 🌟 keisou-lab GitHub Profile README 🌟 -->
+<h1 align="center">⚙️ keisou-lab（計装ラボ）</h1>
 
-[**keisou-lab（計装ラボ）**](https://keisou-lab.github.io/keisou-lab/) は、  
-電気工事・計装設計者向けの **無料Webツール集** を公開しているサイトです。  
-電線サイズ計算・電圧降下計算など、現場で役立つツールを誰でも無料で利用できます。
-
----
-
-## 🚀 概要
-
-このリポジトリ **`keisou-lab.github.io`** は、  
-GitHub Pages のルートURL（https://keisou-lab.github.io）を管理するためのものです。
-
-実際のサイトコンテンツは以下のリポジトリに格納されています👇
-
-🔗 [https://keisou-lab.github.io/keisou-lab/](https://keisou-lab.github.io/keisou-lab/)
-
-> ※ 当リポジトリでは、上記サイトへ自動転送するための `index.html` のみを設置しています。
+<p align="center">
+  <em>現場と設計をつなぐ。<br>電気工事・計装設計者のための無料Webツール開発。</em>
+</p>
 
 ---
 
-## 🧰 関連リポジトリ
-
-| リポジトリ名 | 内容 |
-|---------------|------|
-| [**keisou-lab**](https://github.com/keisou-lab/keisou-lab) | メインサイト本体。電線断面積・電圧降下などの計算ツールを提供。 |
-| [**keisou-lab.github.io**](https://github.com/keisou-lab/keisou-lab.github.io) | このリポジトリ。GitHub PagesルートURL用のリダイレクトページを管理。 |
-
----
-
-## 💡 サイト構成イメージ
-
-keisou-lab.github.io/
-└── index.html（→ keisou-lab/ へリダイレクト）
-
-keisou-lab/
-├── index.html（トップページ）
-├── style.css
-├── include.js
-├── cable_data.json
-├── common/
-│ ├── header.html
-│ └── footer.html
-├── densenkisan/
-│ ├── index.html
-│ └── script.js
-└── voltage-drop-keisan-tool/
-├── index.html
-└── script.js
-
+## 🔧 公開中のツール
+| ツール名 | 概要 | リンク |
+|:--|:--|:--|
+| **電線断面積計算ツール（VVF・CVV対応）** | 電圧・電流・距離から必要断面積を自動計算 | [🔗 開く](https://keisou-lab.github.io/keisou-lab/densenkisan/) |
+| **電圧降下合計計算ツール** | 複数区間の電圧降下を合計し、OK/NGを自動判定 | [🔗 開く](https://keisou-lab.github.io/keisou-lab/voltage-drop-keisan-tool/) |
 
 ---
 
-## 🧑‍💻 運営情報
+## 💡 Mission
+> **「現場で即使える」軽量・高精度ツールをエンジニアに届ける。**
 
-- **Author:** [keisou-lab](https://github.com/keisou-lab)  
-- **対象ユーザー:** 電気設備設計者・計装エンジニア・第二種電気工事士受験者・DIYユーザー  
-- **利用料:** 無料（広告掲載あり）  
-- **主な技術:** HTML / CSS / JavaScript / GitHub Pages  
-
----
-
-## 🔗 サイトリンク
-
-- 🌐 [公式サイトトップ](https://keisou-lab.github.io/keisou-lab/)
-- 📘 [プライバシーポリシー](https://keisou-lab.github.io/keisou-lab/privacy.html)
-- ⚖️ [免責事項](https://keisou-lab.github.io/keisou-lab/disclaimer.html)
-- 🧮 [電線断面積計算ツール](https://keisou-lab.github.io/keisou-lab/densenkisan/)
-- 🔌 [電圧降下計算ツール](https://keisou-lab.github.io/keisou-lab/voltage-drop-keisan-tool/)
+電気工事・計装設計の現場では、  
+ちょっとした計算に時間がかかることがあります。  
+keisou-lab はその「手間」を削減するために、  
+スマホ・PCどちらからでも使える無料Webツールを開発・公開しています。
 
 ---
 
-## 📈 開発・運用ポリシー
-
-- ツールはすべて **ブラウザ上で動作**（サーバーレス）  
-- 計算式は JIS 規格・電技基準・実務資料に基づいて設計  
-- 利用者の個人情報は収集せず、アクセス解析のみ行います（Google Analytics利用）  
-- Google AdSense による広告を掲載し、運営費を補っています  
-
----
-
-## 🧾 ライセンス
-
-このリポジトリおよび関連コードの一部は **MIT License** のもとで公開されています。  
-自由に利用・改変・再配布が可能ですが、著作権表示を残してください。
+## 🧠 Tech Stack
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000" />
+  <img src="https://img.shields.io/badge/GitHub%20Pages-222222?logo=githubpages&logoColor=white" />
+  <img src="https://img.shields.io/badge/SEO%20Optimization-4285F4?logo=google&logoColor=white" />
+</p>
 
 ---
 
-## 📬 お問い合わせ
+## 🧩 使用している技術
+- **GitHub Pages**：静的サイトホスティング  
+- **Google AdSense / Search Console**：SEO・収益化連携  
+- **JSON-LD構造化データ**：検索エンジン最適化  
+- **レスポンシブデザイン**：スマホ・現場端末対応  
 
-不具合報告・改善提案などは [Issues](https://github.com/keisou-lab/keisou-lab/issues) よりご連絡ください。  
-または GitHub Discussions にて開発者同士の意見交換も歓迎します。
+---
+
+## 🌍 Webサイト
+📎 [keisou-lab.github.io/keisou-lab/](https://keisou-lab.github.io/keisou-lab/)
+
+---
+
+## 📈 今後の展開
+- 絶縁抵抗・短絡電流・照度・力率など、**電気設計系ツールの拡充**  
+- **広告収益＋アクセス解析**を活かしたエンジニア支援プラットフォーム化  
+- 電気・計装分野の**教育コンテンツ・動画化**にも挑戦予定  
+
+---
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=keisou-lab&label=Profile%20Views&color=0e75b6&style=flat" alt="keisou-lab" />
+</p>
+
+<p align="center">
+  <sub>© 2025 keisou-lab ｜ 現場と設計の “間” をつなぐ。</sub>
+</p>
