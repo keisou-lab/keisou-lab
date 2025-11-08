@@ -1,5 +1,6 @@
 /* 電線の必要断面積計算ツール keisou-lab（GitHub Pages対応） */
-const JSON_URL = "../cable_data.json";  // ✅ 相対パスに統一（絶対パスではなく修正）
+const repo = window.location.pathname.split('/')[1];
+const JSON_URL = `${window.location.origin}/${repo}/cable_data.json`;  // ✅ 絶対URLを自動生成（確実に読める）
 
 const cableTypeSel = document.getElementById("cableType");
 const voltageInput = document.getElementById("voltage");
